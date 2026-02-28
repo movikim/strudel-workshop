@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Strudel 코딩 음악 세미나</title>
-  <script src="https://unpkg.com/@strudel/embed@latest"></script>
+  <script src="https://unpkg.com/@strudel/repl@latest"></script>
   <style>
     body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }
     strudel-repl { display: block; height: 400px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc; }
@@ -15,32 +15,12 @@
   <p>이 문서는 웹 서버에서 호스팅되므로 플레이어가 완벽하게 작동합니다.</p>
   
   <h2>1. 첫 번째 비트</h2>
-<strudel-repl>
-    <!--
-setcps(1)
-n("<0 1 2 3 4>*8").scale('G4 minor')
-.s("gm_lead_6_voice")
-.clip(sine.range(.2,.8).slow(8))
-.jux(rev)
-.room(2)
-.sometimes(add(note("12")))
-.lpf(perlin.range(200,20000).slow(4))
--->
-</strudel-repl>
+<strudel-editor>
+</strudel-editor>
 
   <h2>2. 멜로디 연주</h2>
-<strudel-repl>
-    <!--
-setcps(1)
-n("<0 1 2 3 4>*8").scale('G4 minor')
-.s("gm_lead_6_voice")
-.clip(sine.range(.2,.8).slow(8))
-.jux(rev)
-.room(2)
-.sometimes(add(note("12")))
-.lpf(perlin.range(200,20000).slow(4))
--->
-</strudel-repl>
+<strudel-editor>
+</strudel-editor>
 
 </body>
 </html>
