@@ -5,22 +5,106 @@
   <title>Strudel 코딩 음악 세미나</title>
   <script src="https://unpkg.com/@strudel/repl@latest"></script>
   <style>
-    body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; }
-    strudel-editor { display: block; height: 400px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc; }
+    /* 맥(Mac) 기본 폰트와 깔끔한 문서 여백 설정 */
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; color: #333; }
+    h1, h2 { border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+    
+    /* 공식 사이트의 'MiniRepl' 플레이어 디자인 완벽 재현 🎨 */
+    .strudel-wrap {
+      display: flex;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    
+    /* 왼쪽 회색 버튼 바 영역 */
+    .strudel-controls {
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+      padding: 10px;
+      gap: 10px;
+    }
+
+    /* 재생/정지 버튼 디자인 */
+    .strudel-controls button {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      transition: background 0.2s;
+    }
+    .strudel-controls button:hover { background: #f1f5f9; }
+
+    /* 에디터가 화면을 꽉 채우도록 설정 */
+    strudel-editor {
+      flex-grow: 1;
+      min-height: 120px;
+      padding: 0;
+    }
   </style>
 </head>
 <body>
 
   <h1>🎹 Strudel 코딩 음악 세미나</h1>
-  <p>이 문서는 웹 서버에서 호스팅되므로 플레이어가 완벽하게 작동합니다.</p>
+  <p>공식 워크샵 문서에 임베드된 플레이어와 시각적, 기능적으로 동일하게 작동합니다.</p>
   
   <h2>1. 첫 번째 비트</h2>
-<strudel-editor>
+  <div class="strudel-wrap">
+    <div class="strudel-controls">
+      <button class="play-btn" title="재생 (Cmd + Enter)">▶️</button>
+      <button class="stop-btn" title="정지 (Escape)">⏹️</button>
+    </div>
+    <strudel-editor>
 </strudel-editor>
+  </div>
 
   <h2>2. 멜로디 연주</h2>
-<strudel-editor>
+  <div class="strudel-wrap">
+    <div class="strudel-controls">
+      <button class="play-btn" title="재생 (Cmd + Enter)">▶️</button>
+      <button class="stop-btn" title="정지 (Escape)">⏹️</button>
+    </div>
+    <strudel-editor>
 </strudel-editor>
+  </div>
 
+  <script>
+    // 키보드 단축키를 버튼과 직접 연결하는 마법의 스크립트 🪄
+    document.querySelectorAll('.strudel-wrap').forEach(wrap => {
+      const playBtn = wrap.querySelector('.play-btn');
+      const stopBtn = wrap.querySelector('.stop-btn');
+      const editor = wrap.querySelector('strudel-editor');
+
+      // 1. 재생 버튼: 맥(Mac)의 'Cmd + Enter' 단축키를 에디터 안에서 누른 것처럼 강제 실행시킵니다.
+      playBtn.addEventListener('click', () => {
+        editor.dispatchEvent(new KeyboardEvent('keydown', {
+          key: 'Enter',
+          metaKey: true, // 맥(Mac) 환경 Cmd 키 지원
+          ctrlKey: true, 
+          bubbles: true
+        }));
+      });
+
+      // 2. 정지 버튼: Strudel의 글로벌 정지 단축키인 'Escape' 키를 누른 것처럼 속여서 음악을 끕니다.
+      stopBtn.addEventListener('click', () => {
+        editor.dispatchEvent(new KeyboardEvent('keydown', {
+          key: 'Escape',
+          bubbles: true
+        }));
+      });
+    });
+  </script>
 </body>
 </html>
